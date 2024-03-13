@@ -16,11 +16,9 @@ func NewLarkWriter(token string) *LarkWriter {
 }
 
 func (l *LarkWriter) Write(p []byte) (n int, err error) {
-
 	if _, err = l.bot.PostNotificationV2(lark.NewMsgBuffer(lark.MsgText).Text(string(p)).Build()); err != nil {
 		return 0, err
 	}
-
 	return len(p), nil
 
 }

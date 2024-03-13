@@ -23,11 +23,11 @@ func Debug(msg string, fields ...zap.Field) {
 }
 
 func Warn(msg string, fields ...zap.Field) {
-	l.Debug(msg, fields...)
+	l.Warn(msg, fields...)
 }
 
 func Error(msg string, fields ...zap.Field) {
-	l.Debug(msg, fields...)
+	l.Error(msg, fields...)
 }
 
 func Panic(msg string, fields ...zap.Field) {
@@ -36,4 +36,7 @@ func Panic(msg string, fields ...zap.Field) {
 
 func DPanic(msg string, fields ...zap.Field) {
 	l.DPanic(msg, fields...)
+}
+func Sync() error {
+	return l.Sync()
 }

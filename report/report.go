@@ -29,17 +29,17 @@ const (
 
 type ReportConfig struct {
 	//上报的类型，目前支持：wx lark tg
-	Type string `json:"type"`
+	Type string `json:"type" mapstructure:"type"`
 	//lark填webhook tg wx填token
-	Token string `json:"token"`
+	Token string `json:"token" mapstructure:"token"`
 	//tg的chatid
-	ChatID int64 `json:",optional"`
+	ChatID int64 `json:",optional" mapstructure:"chatID"`
 	//日志刷新的频率 单位秒
-	FlushSec int64 `json:",default=3"`
-	//最大日志数量
-	MaxCount int64 `json:",default=20"`
+	FlushSec int64 `json:",default=3" mapstructure:"flushSec"`
+	//最大日志数量即达到多少条会触发刷新
+	MaxCount int64 `json:",default=20" mapstructure:"maxCount"`
 	//什么级别的日志上报
-	Level zap.AtomicLevel `json:"Level"`
+	Level zap.AtomicLevel `json:"Level" mapstructure:"level"`
 }
 
 func NewWriteSyncer(c ReportConfig) zapcore.WriteSyncer {
@@ -83,7 +83,7 @@ func (l *ReportWriterBuffer) Start() {
 	}
 }
 
-// 这个p会被zap复用，一定要注意。
+// 这个p会被zap复用，一定要注意,如果不拷贝该切片可能会出现问题。
 func (l *ReportWriterBuffer) Write(p []byte) (n int, err error) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
@@ -101,7 +101,6 @@ func (l *ReportWriterBuffer) Write(p []byte) (n int, err error) {
 func (l *ReportWriterBuffer) Sync() error {
 	l.mu.Lock()
 	defer l.mu.Unlock()
-	l.buf.Flush()
 	l.count = 0
-	return nil
+	return l.buf.Flush()
 }

@@ -2,7 +2,9 @@ package zaplog
 
 import (
 	"github.com/luxun9527/zaplog/report"
+	"github.com/spf13/viper"
 	"go.uber.org/zap"
+	"log"
 	"testing"
 )
 
@@ -27,18 +29,13 @@ func TestConfig(t *testing.T) {
 		IsReport:      true,
 		ReportConfig: report.ReportConfig{
 			Type:     "lark",
-			Token:    "",
+			Token:    "https://open.feishu.cn/open-apis/bot/v2/hook/71f86ea6-ab9a-4645-b40b-1be00ffe910a",
 			ChatID:   0,
 			FlushSec: 3,
 			MaxCount: 20,
 			Level:    warnLevel,
 		},
-		//ReportConfig: report.ReportConfig{
-		//	Type:     "tg",
-		//	Token:    "6499740288:AAEGZhWULZWto9gjlgxnqwQg1KxVKeJc0Ao",
-		//	ChatID:   -1001980672871,
-		//	FlushSec: 3,
-		//},
+
 		Color:   false,
 		options: nil,
 	}
@@ -52,4 +49,22 @@ func TestConfig(t *testing.T) {
 	defer logger.Sync()
 	logger.Panic("error level ", zap.Any("test", "test1111"))
 
+}
+func TestViperConfig(t *testing.T) {
+	v := viper.New()
+	v.SetConfigFile("./config.yaml")
+	if err := v.ReadInConfig(); err != nil {
+		log.Panicf("read config file failed, err:%v\n", err)
+	}
+	var c Config
+	if err := v.Unmarshal(&c, viper.DecodeHook(StringToLogLevelHookFunc())); err != nil {
+		log.Panicf("Unmarshal config file failed, err:%v\n", err)
+	}
+	InitZapLogger(&c)
+	Debug("debug level ", zap.Any("test", "test"))
+	Info("info level ", zap.Any("test", "test"))
+	Warn("warn level ", zap.Any("test", "test"))
+	Error("error level ", zap.Any("test", "test"))
+	Panic("panic level ", zap.Any("test", "test"))
+	Sync()
 }
