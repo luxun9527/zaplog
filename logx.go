@@ -8,14 +8,14 @@ import (
 
 type Filed = logx.LogField
 
-func Error(err error) Filed {
+func ErrorFiled(err error) Filed {
 	return logx.Field("error", err)
 }
-func Data(data interface{}) Filed {
+func DataFiled(data interface{}) Filed {
 	return logx.Field("data", data)
 }
 
-func Param(data interface{}) Filed {
+func ParamFiled(data interface{}) Filed {
 	return logx.Field("param", data)
 }
 

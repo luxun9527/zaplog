@@ -22,7 +22,7 @@ func TestLogx(t *testing.T) {
 	logx.Infow("this is info level ", logx.Field("key", "value"))
 	//sloww为warn
 	logx.Sloww("this is warn level ", logx.Field("key", "value"))
-	logx.Errorw("this is error level ", Error(errors.New("error !!")))
+	logx.Errorw("this is error level ", ErrorFiled(errors.New("error !!")))
 	defer logx.Close()
 	//server为panic
 	logx.Severe("this is panic level ")
