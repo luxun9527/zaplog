@@ -1,6 +1,6 @@
-# zaplog
+# zaplog 将日志上报到飞书 lark 等im工具中
 
-对zap的简单封装
+对zap的简单封装 完整地址https://github.com/luxun9527/zaplog 如果您觉得对您有帮助您的star就是我更新的动力
 
 在开发中可以开箱即用，通过该库你能了解到zap各个常用配置的用法，支持将指定级别以上的日志通过机器人上报到im工具中如 飞书，企业微信，tg中。
 
@@ -239,3 +239,7 @@ func TestViperConfig(t *testing.T) {
     Sync()
 }
 ```
+
+![](https://cdn.learnku.com/uploads/images/202403/13/51993/SeMBezQqkX.png!large)
+
+![](https://cdn.learnku.com/uploads/images/202403/13/51993/Jp1jwtz2qT.png!large)
