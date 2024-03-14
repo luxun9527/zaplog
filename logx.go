@@ -6,16 +6,16 @@ import (
 	"go.uber.org/zap"
 )
 
-type Filed = logx.LogField
+type Field = logx.LogField
 
-func ErrorFiled(err error) Filed {
+func ErrorField(err error) Field {
 	return logx.Field("error", err)
 }
-func DataFiled(data interface{}) Filed {
+func DataField(data interface{}) Field {
 	return logx.Field("data", data)
 }
 
-func ParamFiled(data interface{}) Filed {
+func ParamField(data interface{}) Field {
 	return logx.Field("param", data)
 }
 
