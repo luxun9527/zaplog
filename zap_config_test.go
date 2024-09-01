@@ -8,6 +8,45 @@ import (
 	"testing"
 )
 
+func TestConsoleJson(t *testing.T) {
+	l, _ := zap.ParseAtomicLevel("debug")
+	warnLevel, _ := zap.ParseAtomicLevel("warn")
+	c := Config{
+		Name:          "test",
+		Level:         l,
+		Stacktrace:    true,
+		AddCaller:     true,
+		CallerShip:    0,
+		Mode:          "console",
+		FileName:      "",
+		ErrorFileName: "",
+		MaxSize:       0,
+		MaxAge:        0,
+		MaxBackup:     0,
+		Async:         false,
+		Json:          true,
+		Compress:      false,
+		IsReport:      false,
+		ReportConfig: report.ReportConfig{
+			Type:     "lark",
+			Token:    "https://open.feishu.cn/open-apis/bot/v2/hook/71f86ea6-ab9a-4645-b40b-1be00ffe910a",
+			ChatID:   0,
+			FlushSec: 3,
+			MaxCount: 20,
+			Level:    warnLevel,
+		},
+
+		Color:   true,
+		options: nil,
+	}
+	InitZapLogger(&c)
+	sugarLog.Debugf("test level %v", "debug")
+	sugarLog.Infof("info level %v", "info")
+	sugarLog.Warnf("warn level %v", "warn")
+	sugarLog.Errorf("error level %v", "error")
+	sugarLog.Panicf("panic level %v", "panic")
+}
+
 func TestConfig(t *testing.T) {
 	l, _ := zap.ParseAtomicLevel("debug")
 	warnLevel, _ := zap.ParseAtomicLevel("warn")

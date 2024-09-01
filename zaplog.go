@@ -3,13 +3,29 @@ package zaplog
 import "go.uber.org/zap"
 
 var (
-	l *zap.Logger
+	l        *zap.Logger
+	sugarLog *zap.SugaredLogger
 )
 
 func InitZapLogger(loggerConfig *Config) {
 	l = loggerConfig.Build()
+	sugarLog = l.Sugar()
 }
-
+func Debugf(msg string, fields ...interface{}) {
+	sugarLog.Debugf(msg, fields...)
+}
+func Panicf(msg string, fields ...interface{}) {
+	sugarLog.Panicf(msg, fields...)
+}
+func Infof(msg string, fields ...interface{}) {
+	sugarLog.Infof(msg, fields...)
+}
+func Errorf(msg string, fields ...interface{}) {
+	sugarLog.Errorf(msg, fields...)
+}
+func Warnf(msg string, fields ...interface{}) {
+	sugarLog.Warnf(msg, fields...)
+}
 func GetZapLogger() *zap.Logger {
 	return l
 }

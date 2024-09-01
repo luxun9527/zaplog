@@ -178,7 +178,7 @@ func (lc *Config) Build() *zap.Logger {
 	//当错误时是否添加堆栈信息
 	if lc.Stacktrace {
 		//在error级别以上添加堆栈
-		lc.options = append(lc.options, zap.AddStacktrace(zap.ErrorLevel))
+		lc.options = append(lc.options, zap.AddStacktrace(zap.PanicLevel))
 	}
 	if lc.Name != "" {
 		logger = logger.With(zap.String("project", lc.Name))

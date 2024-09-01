@@ -1,4 +1,4 @@
-# zaplog 将日志上报到飞书 lark 等im工具中
+# zaplog 将日志上报到飞书 企业微信等im工具中
 
 对zap的简单封装 完整地址https://github.com/luxun9527/zaplog 如果您觉得对您有帮助您的star就是我更新的动力
 
