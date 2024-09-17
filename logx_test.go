@@ -1,7 +1,6 @@
 package zaplog
 
 import (
-	"errors"
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/logx"
 	"testing"
@@ -17,12 +16,11 @@ func TestLogx(t *testing.T) {
 	//	FlushSec: 3,
 	//}
 	InitZapLogger(&c)
-	logx.SetWriter(NewZapWriter(l))
+	logx.SetWriter(NewZapWriter(logger))
 	logx.Debugw("this is debug level ", logx.Field("key", "value"))
 	logx.Infow("this is info level ", logx.Field("key", "value"))
 	//sloww为warn
 	logx.Sloww("this is warn level ", logx.Field("key", "value"))
-	logx.Errorw("this is error level ", ErrorFiled(errors.New("error !!")))
 	defer logx.Close()
 	//server为panic
 	logx.Severe("this is panic level ")

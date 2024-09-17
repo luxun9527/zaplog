@@ -2,14 +2,20 @@ package zaplog
 
 import "go.uber.org/zap"
 
+const (
+	EsModuleKey    = "es"
+	KafkaModuleKey = "kafka"
+	RedisModuleKey = "redis"
+)
+
 var (
-	l        *zap.Logger
+	logger   *zap.Logger
 	sugarLog *zap.SugaredLogger
 )
 
 func InitZapLogger(loggerConfig *Config) {
-	l = loggerConfig.Build()
-	sugarLog = l.Sugar()
+	logger = loggerConfig.Build()
+	sugarLog = logger.Sugar()
 }
 func Debugf(msg string, fields ...interface{}) {
 	sugarLog.Debugf(msg, fields...)
@@ -27,32 +33,32 @@ func Warnf(msg string, fields ...interface{}) {
 	sugarLog.Warnf(msg, fields...)
 }
 func GetZapLogger() *zap.Logger {
-	return l
+	return logger
 }
 
 func Info(msg string, fields ...zap.Field) {
-	l.Info(msg, fields...)
+	logger.Info(msg, fields...)
 }
 
 func Debug(msg string, fields ...zap.Field) {
-	l.Debug(msg, fields...)
+	logger.Debug(msg, fields...)
 }
 
 func Warn(msg string, fields ...zap.Field) {
-	l.Warn(msg, fields...)
+	logger.Warn(msg, fields...)
 }
 
 func Error(msg string, fields ...zap.Field) {
-	l.Error(msg, fields...)
+	logger.Error(msg, fields...)
 }
 
 func Panic(msg string, fields ...zap.Field) {
-	l.Panic(msg, fields...)
+	logger.Panic(msg, fields...)
 }
 
 func DPanic(msg string, fields ...zap.Field) {
-	l.DPanic(msg, fields...)
+	logger.DPanic(msg, fields...)
 }
 func Sync() error {
-	return l.Sync()
+	return logger.Sync()
 }
