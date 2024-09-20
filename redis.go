@@ -7,7 +7,7 @@ import (
 
 var (
 	RedisLogger = &redisLogger{
-		logger: logger.With(zap.String("module", RedisModuleKey)).Sugar(),
+		logger: DefaultLogger.With(zap.String("module", RedisModuleKey)).Sugar(),
 	}
 )
 

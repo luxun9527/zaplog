@@ -86,7 +86,7 @@ func (lc *Config) Build() *zap.Logger {
 		MessageKey:    "message",
 		LevelKey:      "level",
 		TimeKey:       "time",
-		NameKey:       "logger",
+		NameKey:       "DefaultLogger",
 		CallerKey:     "caller",
 		StacktraceKey: "stacktrace",
 		LineEnding:    zapcore.DefaultLineEnding,

@@ -5,7 +5,7 @@ import "go.uber.org/zap"
 // KafkaLogger sarama.Logger=xx
 var (
 	KafkaLogger = &kafkaLogger{
-		logger: logger.With(zap.String("module", KafkaModuleKey)).Sugar(),
+		logger: DefaultLogger.With(zap.String("module", KafkaModuleKey)).Sugar(),
 	}
 )
 

@@ -1,6 +1,8 @@
 package zaplog
 
-import "go.uber.org/zap"
+import (
+	"go.uber.org/zap"
+)
 
 const (
 	EsModuleKey    = "es"
@@ -8,57 +10,71 @@ const (
 	RedisModuleKey = "redis"
 )
 
-var (
-	logger   *zap.Logger
-	sugarLog *zap.SugaredLogger
+const (
+	ConsoleMode = "console"
+	FileMode    = "file"
 )
 
+var (
+	DefaultLogger   *zap.Logger
+	DefaultSugarLog *zap.SugaredLogger
+)
+
+func init() {
+	InitZapLogger(&Config{
+		Level:      zap.NewAtomicLevelAt(zap.InfoLevel),
+		AddCaller:  true,
+		CallerShip: 3,
+		Mode:       ConsoleMode,
+		Color:      true,
+	})
+}
 func InitZapLogger(loggerConfig *Config) {
-	logger = loggerConfig.Build()
-	sugarLog = logger.Sugar()
+	DefaultLogger = loggerConfig.Build()
+	DefaultSugarLog = DefaultLogger.Sugar()
 }
 func Debugf(msg string, fields ...interface{}) {
-	sugarLog.Debugf(msg, fields...)
+	DefaultSugarLog.Debugf(msg, fields...)
 }
 func Panicf(msg string, fields ...interface{}) {
-	sugarLog.Panicf(msg, fields...)
+	DefaultSugarLog.Panicf(msg, fields...)
 }
 func Infof(msg string, fields ...interface{}) {
-	sugarLog.Infof(msg, fields...)
+	DefaultSugarLog.Infof(msg, fields...)
 }
 func Errorf(msg string, fields ...interface{}) {
-	sugarLog.Errorf(msg, fields...)
+	DefaultSugarLog.Errorf(msg, fields...)
 }
 func Warnf(msg string, fields ...interface{}) {
-	sugarLog.Warnf(msg, fields...)
+	DefaultSugarLog.Warnf(msg, fields...)
 }
 func GetZapLogger() *zap.Logger {
-	return logger
+	return DefaultLogger
 }
 
 func Info(msg string, fields ...zap.Field) {
-	logger.Info(msg, fields...)
+	DefaultLogger.Info(msg, fields...)
 }
 
 func Debug(msg string, fields ...zap.Field) {
-	logger.Debug(msg, fields...)
+	DefaultLogger.Debug(msg, fields...)
 }
 
 func Warn(msg string, fields ...zap.Field) {
-	logger.Warn(msg, fields...)
+	DefaultLogger.Warn(msg, fields...)
 }
 
 func Error(msg string, fields ...zap.Field) {
-	logger.Error(msg, fields...)
+	DefaultLogger.Error(msg, fields...)
 }
 
 func Panic(msg string, fields ...zap.Field) {
-	logger.Panic(msg, fields...)
+	DefaultLogger.Panic(msg, fields...)
 }
 
 func DPanic(msg string, fields ...zap.Field) {
-	logger.DPanic(msg, fields...)
+	DefaultLogger.DPanic(msg, fields...)
 }
 func Sync() error {
-	return logger.Sync()
+	return DefaultLogger.Sync()
 }

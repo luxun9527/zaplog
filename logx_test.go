@@ -16,7 +16,7 @@ func TestLogx(t *testing.T) {
 	//	FlushSec: 3,
 	//}
 	InitZapLogger(&c)
-	logx.SetWriter(NewZapWriter(logger))
+	logx.SetWriter(NewZapWriter(DefaultLogger))
 	logx.Debugw("this is debug level ", logx.Field("key", "value"))
 	logx.Infow("this is info level ", logx.Field("key", "value"))
 	//sloww为warn

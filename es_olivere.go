@@ -12,11 +12,11 @@ elastic.SetInfoLog(EsInfoLog),  // 启用信息日志
 
 var (
 	ErrorEsLogger = &esLogger{
-		logger: logger.With(zap.String("module", EsModuleKey)).Sugar(),
+		logger: DefaultLogger.With(zap.String("module", EsModuleKey)).Sugar(),
 		level:  zapcore.ErrorLevel,
 	}
 	InfoEsLogger = &esLogger{
-		logger: logger.With(zap.String("module", EsModuleKey)).Sugar(),
+		logger: DefaultLogger.With(zap.String("module", EsModuleKey)).Sugar(),
 		level:  zapcore.ErrorLevel,
 	}
 )

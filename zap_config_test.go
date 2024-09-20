@@ -40,11 +40,11 @@ func TestConsoleJson(t *testing.T) {
 		options: nil,
 	}
 	InitZapLogger(&c)
-	sugarLog.Debugf("test level %v", "debug")
-	sugarLog.Infof("info level %v", "info")
-	sugarLog.Warnf("warn level %v", "warn")
-	sugarLog.Errorf("error level %v", "error")
-	sugarLog.Panicf("panic level %v", "panic")
+	DefaultSugarLog.Debugf("test level %v", "debug")
+	DefaultSugarLog.Infof("info level %v", "info")
+	DefaultSugarLog.Warnf("warn level %v", "warn")
+	DefaultSugarLog.Errorf("error level %v", "error")
+	DefaultSugarLog.Panicf("panic level %v", "panic")
 }
 
 func TestConfig(t *testing.T) {
