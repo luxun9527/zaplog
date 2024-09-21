@@ -49,20 +49,18 @@ var (
 	DefaultLogger   *zap.Logger
 	DefaultSugarLog *zap.SugaredLogger
 )
+var _ = InitZapLogger(&Config{
+	Level:      zap.NewAtomicLevelAt(zap.InfoLevel),
+	AddCaller:  true,
+	CallerShip: 3,
+	Mode:       ConsoleMode,
+	Color:      true,
+})
 
-func init() {
-	InitZapLogger(&Config{
-		Level:      zap.NewAtomicLevelAt(zap.InfoLevel),
-		AddCaller:  true,
-		CallerShip: 3,
-		Mode:       ConsoleMode,
-		Color:      true,
-	})
-}
-
-func InitZapLogger(loggerConfig *Config) {
+func InitZapLogger(loggerConfig *Config) (err error) {
 	DefaultLogger = loggerConfig.Build()
 	DefaultSugarLog = DefaultLogger.Sugar()
+	return
 }
 func Debugf(msg string, fields ...interface{}) {
 	DefaultSugarLog.Debugf(msg, fields...)
