@@ -37,6 +37,7 @@ const (
 	EsModuleKey    = "es"
 	KafkaModuleKey = "kafka"
 	RedisModuleKey = "redis"
+	GinModuleKey   = "gin"
 )
 
 const (
