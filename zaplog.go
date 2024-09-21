@@ -32,6 +32,7 @@ var (
 	Skip = zap.Skip()
 	// ByteString ...
 	ByteString = zap.ByteString
+	ParseLevel = zapcore.ParseLevel
 )
 
 const (
