@@ -19,6 +19,13 @@ type redisLogger struct {
 	logger *zap.SugaredLogger
 }
 
-func (esLog *redisLogger) Printf(ctx context.Context, format string, v ...interface{}) {
-	esLog.logger.Infof(format, v...)
+func (rl *redisLogger) Printf(ctx context.Context, format string, v ...interface{}) {
+	rl.logger.Infof(format, v...)
+}
+func (rl *redisLogger) Update(logger ...*zap.Logger) {
+	if len(logger) == 0 {
+		rl.logger = DefaultLogger.With(zap.String("module", RedisModuleKey)).Sugar()
+		return
+	}
+	rl.logger = logger[0].Sugar()
 }

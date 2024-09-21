@@ -2,27 +2,34 @@ package zaplog
 
 import "go.uber.org/zap"
 
-// KafkaLogger sarama.Logger=xx
+// KafkaSaramaLogger sarama.Logger=xx
 var (
-	KafkaLogger *kafkaLogger
+	KafkaSaramaLogger *kafkaSaramaLogger
 )
 
 func init() {
-	KafkaLogger = &kafkaLogger{
+	KafkaSaramaLogger = &kafkaSaramaLogger{
 		logger: DefaultLogger.With(zap.String("module", KafkaModuleKey)).Sugar(),
 	}
 }
 
-type kafkaLogger struct {
+type kafkaSaramaLogger struct {
 	logger *zap.SugaredLogger
 }
 
-func (k *kafkaLogger) Print(v ...interface{}) {
+func (k *kafkaSaramaLogger) Print(v ...interface{}) {
 	k.logger.Info(v)
 }
-func (k *kafkaLogger) Printf(format string, v ...interface{}) {
+func (k *kafkaSaramaLogger) Printf(format string, v ...interface{}) {
 	k.logger.Infof(format, v)
 }
-func (k *kafkaLogger) Println(v ...interface{}) {
+func (k *kafkaSaramaLogger) Println(v ...interface{}) {
 	k.logger.Infoln(v)
+}
+func (k *kafkaSaramaLogger) Update(logger ...*zap.Logger) {
+	if len(logger) == 0 {
+		k.logger = DefaultLogger.With(zap.String("module", KafkaModuleKey)).Sugar()
+		return
+	}
+	k.logger = logger[0].Sugar()
 }

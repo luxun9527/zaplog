@@ -77,6 +77,12 @@ func UpdateLoggerLevel(level zapcore.Level) {
 func InitZapLogger(loggerConfig *Config) {
 	DefaultLogger = loggerConfig.Build()
 	DefaultSugarLog = DefaultLogger.Sugar()
+	RedisLogger.Update()
+	InfoEsOlivereLogger.Update()
+	ErrorEsOlivereLogger.Update()
+	RedisLogger.Update()
+	KafkaSaramaLogger.Update()
+	GinOutPut.Update()
 }
 func Debugf(msg string, fields ...interface{}) {
 	DefaultSugarLog.Debugf(msg, fields...)
