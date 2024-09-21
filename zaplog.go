@@ -4,6 +4,35 @@ import (
 	"go.uber.org/zap"
 )
 
+var (
+	// String ...
+	String = zap.String
+	// Any ...
+	Any = zap.Any
+	// Int64 ...
+	Int64 = zap.Int64
+	// Int ...
+	Int = zap.Int
+	// Int32 ...
+	Int32 = zap.Int32
+	// Uint ...
+	Uint = zap.Uint
+	// Duration ...
+	Duration = zap.Duration
+	// Durationp ...
+	Durationp = zap.Durationp
+	// Object ...
+	Object = zap.Object
+	// Namespace ...
+	Namespace = zap.Namespace
+	// Reflect ...
+	Reflect = zap.Reflect
+	// Skip ...
+	Skip = zap.Skip()
+	// ByteString ...
+	ByteString = zap.ByteString
+)
+
 const (
 	EsModuleKey    = "es"
 	KafkaModuleKey = "kafka"
@@ -29,6 +58,7 @@ func init() {
 		Color:      true,
 	})
 }
+
 func InitZapLogger(loggerConfig *Config) {
 	DefaultLogger = loggerConfig.Build()
 	DefaultSugarLog = DefaultLogger.Sugar()
