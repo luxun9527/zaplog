@@ -2,6 +2,7 @@ package zaplog
 
 import (
 	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 )
 
 var (
@@ -46,21 +47,36 @@ const (
 )
 
 var (
-	DefaultLogger   *zap.Logger
-	DefaultSugarLog *zap.SugaredLogger
+	DevConfig = &Config{
+		Level:      zap.NewAtomicLevelAt(zap.InfoLevel),
+		AddCaller:  true,
+		CallerShip: 1,
+		Mode:       ConsoleMode,
+		Color:      true,
+	}
+	ProdConfig = &Config{
+		Level:      zap.NewAtomicLevelAt(zap.InfoLevel),
+		AddCaller:  true,
+		CallerShip: 1,
+		Mode:       ConsoleMode,
+		Stacktrace: true,
+		Json:       true,
+		Color:      false,
+	}
 )
-var _ = InitZapLogger(&Config{
-	Level:      zap.NewAtomicLevelAt(zap.InfoLevel),
-	AddCaller:  true,
-	CallerShip: 1,
-	Mode:       ConsoleMode,
-	Color:      true,
-})
+var (
+	DefaultLogger   = DevConfig.Build()
+	DefaultSugarLog = DefaultLogger.Sugar()
+)
 
-func InitZapLogger(loggerConfig *Config) (err error) {
+func UpdateLoggerLevel(level zapcore.Level) {
+	DevConfig.UpdateLevel(level)
+	ProdConfig.UpdateLevel(level)
+}
+
+func InitZapLogger(loggerConfig *Config) {
 	DefaultLogger = loggerConfig.Build()
 	DefaultSugarLog = DefaultLogger.Sugar()
-	return
 }
 func Debugf(msg string, fields ...interface{}) {
 	DefaultSugarLog.Debugf(msg, fields...)
