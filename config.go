@@ -83,10 +83,10 @@ func (lc *Config) Build() *zap.Logger {
 	)
 	encoderConfig := zapcore.EncoderConfig{
 		//当存储的格式为JSON的时候这些作为可以key
-		MessageKey:    "message",
+		MessageKey:    "msg",
 		LevelKey:      "level",
 		TimeKey:       "time",
-		NameKey:       "DefaultLogger",
+		NameKey:       "logger",
 		CallerKey:     "caller",
 		StacktraceKey: "stacktrace",
 		LineEnding:    zapcore.DefaultLineEnding,
