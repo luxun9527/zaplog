@@ -4,10 +4,14 @@ import "go.uber.org/zap"
 
 // KafkaLogger sarama.Logger=xx
 var (
+	KafkaLogger *kafkaLogger
+)
+
+func init() {
 	KafkaLogger = &kafkaLogger{
 		logger: DefaultLogger.With(zap.String("module", KafkaModuleKey)).Sugar(),
 	}
-)
+}
 
 type kafkaLogger struct {
 	logger *zap.SugaredLogger

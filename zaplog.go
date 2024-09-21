@@ -52,7 +52,7 @@ var (
 var _ = InitZapLogger(&Config{
 	Level:      zap.NewAtomicLevelAt(zap.InfoLevel),
 	AddCaller:  true,
-	CallerShip: 3,
+	CallerShip: 1,
 	Mode:       ConsoleMode,
 	Color:      true,
 })

@@ -6,10 +6,14 @@ import (
 )
 
 var (
+	RedisLogger *redisLogger
+)
+
+func init() {
 	RedisLogger = &redisLogger{
 		logger: DefaultLogger.With(zap.String("module", RedisModuleKey)).Sugar(),
 	}
-)
+}
 
 type redisLogger struct {
 	logger *zap.SugaredLogger

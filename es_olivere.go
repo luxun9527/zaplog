@@ -11,6 +11,11 @@ elastic.SetInfoLog(EsInfoLog),  // 启用信息日志
 */
 
 var (
+	ErrorEsLogger *esLogger
+	InfoEsLogger  *esLogger
+)
+
+func init() {
 	ErrorEsLogger = &esLogger{
 		logger: DefaultLogger.With(zap.String("module", EsModuleKey)).Sugar(),
 		level:  zapcore.ErrorLevel,
@@ -19,7 +24,7 @@ var (
 		logger: DefaultLogger.With(zap.String("module", EsModuleKey)).Sugar(),
 		level:  zapcore.ErrorLevel,
 	}
-)
+}
 
 type esLogger struct {
 	logger *zap.SugaredLogger

@@ -5,10 +5,14 @@ import (
 )
 
 var (
+	GinOutPut *ginOutput
+)
+
+func init() {
 	GinOutPut = &ginOutput{
 		logger: DefaultLogger.With(zap.String("module", GinModuleKey)).Sugar(),
 	}
-)
+}
 
 type ginOutput struct {
 	logger *zap.SugaredLogger
