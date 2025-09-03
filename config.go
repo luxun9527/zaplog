@@ -2,7 +2,7 @@ package zlog
 
 import (
 	"fmt"
-	"github.com/luxun9527/zlog/report"
+	"github.com/ikun2021/zlog/report"
 
 	"github.com/mitchellh/mapstructure"
 	"go.uber.org/zap"

@@ -109,7 +109,7 @@ Panicf("level %s", "panic")
 {"level":"info","time":"2024-12-14-16:08:03","caller":"E:/demoproject/zlog/zap_config_test.go:23","msg":"level info"}
 {"level":"info","time":"2024-12-14-16:08:03","caller":"E:/demoproject/zlog/zap_config_test.go:24","msg":"level info"}
 {"level":"warn","time":"2024-12-14-16:08:03","caller":"E:/demoproject/zlog/zap_config_test.go:25","msg":"level warn"}
-{"level":"panic","time":"2024-12-14-16:08:03","caller":"E:/demoproject/zlog/zap_config_test.go:26","msg":"level panic","stacktrace":"github.com/luxun9527/zlog.TestProdConfig\n\tE:/demoproject/zlog/zap_config_test.go:26\ntesting.tRunner\n\tE:/goroot/src/testing/testing.go:1689"}	
+{"level":"panic","time":"2024-12-14-16:08:03","caller":"E:/demoproject/zlog/zap_config_test.go:26","msg":"level panic","stacktrace":"github.com/ikun2021/zlog.TestProdConfig\n\tE:/demoproject/zlog/zap_config_test.go:26\ntesting.tRunner\n\tE:/goroot/src/testing/testing.go:1689"}	
 ```
 
 ### 3、动态调整日志等级

@@ -2,7 +2,7 @@ package zlog
 
 import (
 	"encoding/json"
-	"github.com/luxun9527/zlog/report"
+	"github.com/ikun2021/zlog/report"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
 	"io"

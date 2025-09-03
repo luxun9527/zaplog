@@ -1,4 +1,4 @@
-module github.com/luxun9527/zlog
+module github.com/ikun2021/zlog
 
 go 1.20
 
